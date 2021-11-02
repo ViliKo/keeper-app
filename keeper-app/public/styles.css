@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    box-sizing: inherit;
+}
+
+
+.container {
+    font-family: 'Andada Pro', 'Arial Narrow', Arial, sans-serif;
+    background: white;
+}
+
+/* top bar */
+
+.top_bar {
+    background-color: blue;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 10px;
+}
+
+.top_bar__logo {
+    color: white;
+}
+
+/* note */
+
+.note {
+    margin: 20px 40px;
+    padding: 10px 20px;
+    width: 200px;
+    background: wheat;
+
+}
+
+.note__title {
+    color: blue;
+}
+
+.note__content {
+    color: black;
+}
+
+/* footer */
+
+.site_footer {
+    bottom: 0;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 8px;
+}
+
+.site_footer__copyright {
+}
