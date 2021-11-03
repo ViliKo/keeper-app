@@ -1,15 +1,15 @@
 import React from "react";
 
-function ToDoItem(props) {
+function Notes(props) {
   return (
     <div
       onClick={() => {
         props.onChecked(props.id);
       }}
     >
-      <li>{props.text}</li>
+      <li>{props.title} {props.note}</li>
     </div>
   );
 }
 
-export default ToDoItem;
+export default Notes;

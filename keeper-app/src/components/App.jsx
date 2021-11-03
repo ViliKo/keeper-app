@@ -1,33 +1,45 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import Note from './Note';
-import ToDoItem from './toDoItem';
-import InputForm from './InputForm';
+import Notes from './Notes';
+import AddNote from './AddNote';
 
-const createNote = (note) => {
-	return <Note key={note.key} title={note.title} content={note.content} />;
-};
 
-const App = (_) => {
-	const [ inputText, setInputText ] = useState('');
-	const [ items, setItems ] = useState([]);
+const App = () => {
+	const [ noteText, setNoteText ] = useState({
+		title: '',
+		note: ''
+	});
+	const [ notes, setNotes ] = useState([]);
 
 	const handleChange = (event) => {
-		const newValue = event.target.value;
-		setInputText(newValue);
-	};
-
-	const addItem = () => {
-		setItems((prevItems) => {
-			return [ ...prevItems, inputText ];
+		const { name, value } = event.target;
+		setNoteText((prevValue) => {
+			if (name === 'title') {
+				return {
+					title: value,
+					note: prevValue.note
+				};
+			} else if (name === 'note') {
+				return {
+					title: prevValue.title,
+					note: value
+				};
+			}
 		});
-		setInputText('');
 	};
 
-	const deleteItem = (id) => {
-		setItems((prevItems) => {
-			return prevItems.filter((item, index) => {
+	const addNote = (event) => {
+		event.preventDefault();
+		setNotes((prevNotes) => {
+			return [ ...prevNotes, noteText ];
+		});
+		setNoteText('');
+	};
+
+	const deleteNote = (id) => {
+		setNotes((prevNotes) => {
+			return prevNotes.filter((item, index) => {
 				return index !== id;
 			});
 		});
@@ -36,11 +48,11 @@ const App = (_) => {
 	return (
 		<div className="container">
 			<Header />
-			<InputForm onChange={handleChange} value={inputText} onClick={addItem} />
+			<AddNote onChange={handleChange} valueTitle={noteText.title} valueNote={noteText.note} nameTitle="title" nameNote="note" onClick={addNote} />
 			<div>
 				<ul>
-					{items.map((todoItem, index) => (
-						<ToDoItem key={index} id={index} text={todoItem} onChecked={deleteItem} />
+					{notes.map((note, index) => (
+						<Notes key={index} id={index} title={note.title} note={note.note} onChecked={deleteNote} />
 					))}
 				</ul>
 			</div>
