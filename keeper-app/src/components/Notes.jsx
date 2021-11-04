@@ -1,15 +1,19 @@
-import React from "react";
+import React from 'react';
 
 function Notes(props) {
-  return (
-    <div
-      onClick={() => {
-        props.onChecked(props.id);
-      }}
-    >
-      <li>{props.title} {props.note}</li>
-    </div>
-  );
+	return (
+		<li className="note">
+			<h1>{props.title}</h1>
+			<p>{props.note}</p>
+			<button
+				onClick={() => {
+					props.onChecked(props.id);
+				}}
+			>
+				delete
+			</button>
+		</li>
+	);
 }
 
 export default Notes;

@@ -4,7 +4,6 @@ import Footer from './Footer';
 import Notes from './Notes';
 import AddNote from './AddNote';
 
-
 const App = () => {
 	const [ noteText, setNoteText ] = useState({
 		title: '',
@@ -34,7 +33,7 @@ const App = () => {
 		setNotes((prevNotes) => {
 			return [ ...prevNotes, noteText ];
 		});
-		setNoteText('');
+		setNoteText({ title: '', note: '' });
 	};
 
 	const deleteNote = (id) => {
@@ -48,14 +47,19 @@ const App = () => {
 	return (
 		<div className="container">
 			<Header />
-			<AddNote onChange={handleChange} valueTitle={noteText.title} valueNote={noteText.note} nameTitle="title" nameNote="note" onClick={addNote} />
-			<div>
-				<ul>
-					{notes.map((note, index) => (
-						<Notes key={index} id={index} title={note.title} note={note.note} onChecked={deleteNote} />
-					))}
-				</ul>
-			</div>
+			<AddNote
+				onChange={handleChange}
+				valueTitle={noteText.title}
+				valueNote={noteText.note}
+				nameTitle="title"
+				nameNote="note"
+				onClick={addNote}
+			/>
+			<ul className="notes_containers">
+				{notes.map((note, index) => (
+					<Notes key={index} id={index} title={note.title} note={note.note} onChecked={deleteNote} />
+				))}
+			</ul>
 			<Footer />
 		</div>
 	);
